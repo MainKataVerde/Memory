@@ -1,6 +1,7 @@
 import math
 import random
 
+# clase destinada a elavorar el tablero donde se va a jugar
 class Board:
     def __init__(self, width, height):
         self.width = width # número de columnas
@@ -8,9 +9,9 @@ class Board:
         self.boardOut = [["*" for i in range(width)] for j in range(height)] # lista 2D para el jugador (oculta)
         self.boardIn = [[] for j in range(height)] # lista 2D con todas las figuras (oculta)
         self.boardCheck = [["*" for i in range(width)] for j in range(height)] # lista 2D con todas las figuras (oculta)
-        self.maxPoint = math.trunc(((self.width * self.height)/2)/2)
+        self.maxPoint = self.width * self.height
         self.elementos = ["🎃", "👻", "👽", "🐍", "🦄", "🍕", "🌈", "🚀", "🐸", "💎", "🔥", "🍄", "🌻", "⚽", "🎲"]# array con los emoji que vamos a usar
-
+        self.posicionesCorrectas = []
     # metodo que imprime la array que va a ver el usuario    
     def boarOutPrint(self):
         num = 1
@@ -50,13 +51,26 @@ class Board:
         self.boardOut[(row-1)][(colum - 1)] = self.boardIn[(row-1)][(colum - 1)]
         self.boarOutPrint()
     # metod que comprueba que la pareja que hemos elegido es correcta
-    def checkPairs(self , colm1 , rw1 , colm2 , rw2):
+    def checkPairs(self , colm1 , rw1 , colm2 , rw2):    
         if self.boardIn[(rw1 -1)][(colm1 - 1)] == self.boardIn[(rw2 -1)][(colm2 - 1)] :
+            self.posicionesCorrectas.append((rw1 -1))
+            self.posicionesCorrectas.append((colm1 -1))
+            self.posicionesCorrectas.append((rw2 -1))
+            self.posicionesCorrectas.append((colm2 -1))
             return True
         else:
             self.boardOut[(rw1-1)][(colm1 - 1)] = "*"
             self.boardOut[(rw2-1)][(colm2 - 1)] = "*"
             return False
+    
+    def checkPosition(self , colm , rows):
+        if colm > (self.width * self.height) or rows > (self.width * self.height) : 
+            return False
+        elif self.boardOut[(rows -1)][(colm - 1)] != "*":
+            return False
+        else: 
+            return True
+            
             
 
 

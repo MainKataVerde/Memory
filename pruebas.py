@@ -1,16 +1,8 @@
-width = 4
-height= 3
+posicionesCorrectas = [[2 , 4]]
+posicionCompro = [ 2 , 4]
 
-boardOut = [["*" for i in range(width)] for j in range(height)]
+for i in range(len(posicionesCorrectas)):
+        for j in range(len(posicionesCorrectas[i]) - 1):
+            if posicionCompro[0] == posicionCompro[i][] and posicionCompro[1] == posicionesCorrectas[i][0] :
+                print(True)
 
-num = 1
-print("  " , end='')
-for i in range(1 , width + 1):
-        print(i , end="  ")
-print("")
-for i in boardOut:
-    print( num , end=" ")
-    num+=1
-    for j in i:
-        print(j , end="  ")
-    print()
