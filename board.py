@@ -1,4 +1,3 @@
-import math
 import random
 
 # clase destinada a elavorar el tablero donde se va a jugar
