@@ -132,25 +132,23 @@ class Engine:
                 self.player1 = Player(input("Introduce tu nombre :"))
                 dificultad = int(input("¿En que dificultad quieres a la maquina?\n1.Facil\n2.Media\n3.Dificil\n => "))
                 self.cpu= Cpu(dificultad)
-                match dificultad :
-                    case 1 :
-                        print("Maquina en dificultadad Facil\n¡Disfuta!")  
-                        while acabado != True :
-                            turno1 = False
-                            turno2 = False
-                            while turno1 != True:
-                                os.system('cls')
-                                print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.player2.getname() , ": ", self.player2.getpoints(),"\n\n")
-                                self.game_board.boarOutPrint()
-                                print("¿Dónde crees que esta el primero ",self.player1.getname() , "?")
+                print("Maquina en dificultadad Facil\n¡Disfuta!")  
+                while acabado != True :
+                    turno1 = False
+                    turno2 = False
+                    while turno1 != True:
+                        os.system('cls')
+                        print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.player2.getname() , ": ", self.player2.getpoints(),"\n\n")
+                        self.game_board.boarOutPrint()
+                        print("¿Dónde crees que esta el primero ",self.player1.getname() , "?")
+                        p1col1 = int(input("Columnas: "))
+                        p1rws1 = int(input("Filas: "))
+                        if self.game_board.checkPosition(p1col1 , p1rws1) == False:
+                            while self.game_board.checkPosition(p1col1 , p1rws1) == False:
+                                print("Esa posicion ya ha sido adivinada elige una correcta")
                                 p1col1 = int(input("Columnas: "))
                                 p1rws1 = int(input("Filas: "))
-                                if self.game_board.checkPosition(p1col1 , p1rws1) == False:
-                                    while self.game_board.checkPosition(p1col1 , p1rws1) == False:
-                                        print("Esa posicion ya ha sido adivinada elige una correcta")
-                                        p1col1 = int(input("Columnas: "))
-                                        p1rws1 = int(input("Filas: "))
-                        #Limpia la consola
+
                         os.system('cls')
                         print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.player2.getname() , ": ", self.player2.getpoints(),"\n\n")
                         self.game_board.discover(p1col1 , p1rws1)
@@ -167,6 +165,49 @@ class Engine:
                         if self.game_board.checkPairs(p1col1,p1rws1,p1col2,p1rws2):
                             print("Muy bien " , self.player1.getname() , ", has ganado 2 puntos")
                             self.player1.addpoints()
+                        if (self.player1.getpoints() + self.player2.getpoints()) == self.game_board.maxPoint :
+                            if self.player1.getpoints() > self.player2.getpoints() :
+                                print(f"¡Enhorabuena {self.player1.getname()}! , eres el ganador\n Con una puntuacion de {self.player1.getpoints()}")
+                            elif self.player1.getpoints() < self.player2.getpoints():
+                                print(f"¡Enhorabuena {self.player2.getname()}! , eres el ganador\n Con una puntuacion de {self.player2.getpoints()}")
+                            elif self.player1.getpoints() == self.player2.getpoints():
+                                print("¡TENEMOS UN EMPATEEEEEE!")
+                            acabado = True
+                            turno1 = True
+                            turno2 = True
+                        else:
+                            print("!Que mal¡ , mas suerte la proxima ronda")
+                            turno1 = True
+                        #turno de la cpu
+                        while turno2 != True:
+                            time.sleep(1.3)
+                            os.system('cls')
+                            print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.player2.getname() , ": ", self.player2.getpoints(),"\n\n")
+                            self.game_board.boarOutPrint()
+                            print("Ahora tu  ",self.player2.getname() , "¿Dónde crees que esta el primero?")
+                            p2col1 = int(input("Columnas: "))
+                            p2rws1 = int(input("Filas: "))
+                            if self.game_board.checkPosition(p2col1 , p2rws1) == False:
+                                while self.game_board.checkPosition(p2col1 , p2rws1) == False:
+                                    print("Esa posicion ya ha sido adivinada elige una correcta")
+                                    p1col1 = int(input("Columnas: "))
+                                    p1rws1 = int(input("Filas: "))
+                            os.system('cls')
+                            print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.player2.getname() , ": ", self.player2.getpoints(),"\n\n")
+                            self.game_board.discover(p2col1 , p2rws1)
+                            print("¿Y el segundo?")
+                            p2col2 = int(input("Columnas: "))
+                            p2rws2 = int(input("Filas: "))
+                            if self.game_board.checkPosition(p2col2 , p2rws2) == False:
+                                while self.game_board.checkPosition(p2col2 , p2rws2) == False:
+                                    print("Esa posicion ya ha sido adivinada elige una correcta")
+                                    p1col1 = int(input("Columnas: "))
+                                    p1rws1 = int(input("Filas: "))
+                            os.system('cls')
+                            self.game_board.discover(p2col2 ,p2rws2)
+                            if self.game_board.checkPairs(p2col1,p2rws1,p2col2,p2rws2):
+                                print("Muy bien " , self.player2.getname() , ", has ganado 2 puntos")
+                                self.player2.addpoints()
                             if (self.player1.getpoints() + self.player2.getpoints()) == self.game_board.maxPoint :
                                 if self.player1.getpoints() > self.player2.getpoints() :
                                     print(f"¡Enhorabuena {self.player1.getname()}! , eres el ganador\n Con una puntuacion de {self.player1.getpoints()}")
@@ -175,13 +216,12 @@ class Engine:
                                 elif self.player1.getpoints() == self.player2.getpoints():
                                     print("¡TENEMOS UN EMPATEEEEEE!")
                                 acabado = True
-                                turno1 = True
                                 turno2 = True
+                                turno1 = True
                         else:
                             print("!Que mal¡ , mas suerte la proxima ronda")
-                            turno1 = True
-                            
-                        #aqui juega la cpu
+                            turno2 = True
+                        time.sleep(1.3)
                             
                   
 

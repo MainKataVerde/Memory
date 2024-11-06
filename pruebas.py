@@ -1,8 +1,20 @@
-posicionesCorrectas = [[2 , 4]]
-posicionCompro = [ 2 , 4]
+def fibonacci(n):
+#Imprimir la serie de Fibonacci hasta un número dado
+    a, b = 0, 1
+    while a < n:
+        print(a, end=' ')
+        a, b = b, a+b
+        print()
 
-for i in range(len(posicionesCorrectas)):
-        for j in range(len(posicionesCorrectas[i]) - 1):
-            if posicionCompro[0] == posicionCompro[i][] and posicionCompro[1] == posicionesCorrectas[i][0] :
-                print(True)
+#fibonacci(2000)
+
+lista = ["A", "B", "C"]
+for indice, l in enumerate(lista):
+    print(indice, l)
+    
+
+mi_lista = [1, 0, 2, 6, 3, 2]
+
+print(mi_lista[1:3])
+    
 
