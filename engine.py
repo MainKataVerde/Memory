@@ -147,7 +147,6 @@ class Engine:
                                 print("Esa posicion ya ha sido adivinada elige una correcta")
                                 p1col1 = int(input("Columnas: "))
                                 p1rws1 = int(input("Filas: "))
-
                         os.system('cls')
                         print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n\n")
                         self.game_board.discover(p1col1 , p1rws1)
@@ -186,23 +185,25 @@ class Engine:
                         self.game_board.boarOutPrint()
                         print("Ahora tu ", self.cpu.getname() , "¿Dónde crees que esta el primero?")
                         time.sleep(1.3)
-                        postions1 = self.cpu.cpuPlay(columns,rows , self.game_board.boardIn)
+                        postions1 = self.cpu.cpuPlay(columns,rows , self.game_board.boardOut)
                         if self.game_board.checkPosition(*postions1) == False:
                             while self.game_board.checkPosition(*postions1) == False:
                                 print("Esa posicion ya ha sido adivinada elige una correcta")
-                                postions2 = self.cpu.cpuPlay(columns,rows,self.game_board.boardIn)
+                                postions1 = self.cpu.cpuPlay(columns,rows,self.game_board.boardOut)
                                 os.system('cls')
-                        self.cpu.remind(*postions1)
+                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
                         os.system('cls')
                         print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n\n")
                         self.game_board.discover(*postions1)
                         print("¿Y el segundo?")
                         time.sleep(1.3)
-                        postions2 = self.cpu.cpuPlay(columns,rows, self.game_board.boardIn)
+                        postions2 = self.cpu.cpuPlay(columns,rows, self.game_board.boardOut)
                         if self.game_board.checkPosition(*postions2) == False:
                             while self.game_board.checkPosition(*postions2) == False:
                                 print("Esa posicion ya ha sido adivinada elige una correcta")
-                                postions2 = self.cpu.cpuPlay(columns,rows, self.game_board.boardIn)
+                                postions2 = self.cpu.cpuPlay(columns,rows, self.game_board.boardOut)
+                                os.system('cls')
+                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
                         os.system('cls')
                         print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n\n")
                         self.game_board.discover(*postions2)
