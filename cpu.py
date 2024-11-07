@@ -22,3 +22,9 @@ class Cpu(player.Player):  # Usamos 'player.Player' si Player está en el módul
     def remind(self,colm, row):
         self.colmRm = colm
         self.rowRm = row
+        
+    #implementar un diccionario en vez de esto
+    
+    #al fallar una pareja se guarda en un diccionario, luego la maquina elige una posicion, 
+    # busca en el diccionario si esta esa misma cara, 
+    # si esta pues pone la posicion que esta guardad en el diccionario, si no, pues pone una aleatoria
