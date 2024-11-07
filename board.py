@@ -7,8 +7,7 @@ class Board:
         self.height = height # número de filas
         self.boardOut = [["*" for i in range(width)] for j in range(height)] # lista 2D para el jugador (oculta)
         self.boardIn = [[] for j in range(height)] # lista 2D con todas las figuras (oculta)
-        self.boardCheck = [["*" for i in range(width)] for j in range(height)] # lista 2D con todas las figuras (oculta)
-        self.maxPoint = self.width * self.height
+        self.maxPoint = self.width * self.height # puntos maximos que puede alcanzar la partida cada jugador o entre los dos
         self.elementos = ["🎃", "👻", "👽", "🐍", "🦄", "🍕", "🌈", "🚀", "🐸", "💎", "🔥", "🍄", "🌻", "⚽", "🎲"]# array con los emoji que vamos a usar
         self.posicionesCorrectas = []
     # metodo que imprime la array que va a ver el usuario    

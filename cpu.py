@@ -1,15 +1,35 @@
 #clase orientada a el bot , todo lo que sepa el bot es aqui
-import player
 import random
-class Cpu(player):
-    def __init__(self,dificulty):
-        super().__init__("Maquina")
-        self.dificulty = dificulty
+import player  # Importamos el módulo 'player' que debe tener la clase 'Player'
+
+class Cpu(player.Player):  # Usamos 'player.Player' si Player está en el módulo 'player'
+    def __init__(self, difficulty):
+        super().__init__("Makinon")
+        self.difficulty = difficulty
+        self.colmRm = 0
+        self.rowRm = 0
+        self.round = 1
+    def cpuPlay(self, colm, row , boardIn):
+        match self.difficulty:
+            case 1:
+                colmn = random.randint(0, colm - 1)
+                rows = random.randint(0, row - 1)
+                if self.round == 1 :                    
+                    if boardIn[self.rowRm][self.colmRm] == boardIn[rows][colmn]:
+                        return (self.colmRm , self.rowRm)
+                    else :
+                        return(colmn , rows)
+                else:
+                    return(colmn , rows)
+
+    def remind(self,colm, row):
+        self.colmRm = colm
+        self.rowRm = row
+
     
-    def cpuPlay(self , colm , row):
-        match self.dificulty:
-            case 1 :
-                colmn = random.randint(0,colm-1) 
-                row = random.randint(0,row-1)
-                return (colmn,row)
-                
+    def resetRound(self):
+        self.round = 1
+    
+    def addRound(self):
+        self.round = 2 
+        
