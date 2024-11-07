@@ -180,7 +180,6 @@ class Engine:
                             turno1 = True
                         #turno de la cpu
                     while turno2 != True:
-                        self.cpu.resetRound()
                         time.sleep(1.3)
                         os.system('cls')
                         print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n\n")
@@ -194,7 +193,6 @@ class Engine:
                                 postions2 = self.cpu.cpuPlay(columns,rows,self.game_board.boardIn)
                                 os.system('cls')
                         self.cpu.remind(*postions1)
-                        self.cpu.addRound()
                         os.system('cls')
                         print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n\n")
                         self.game_board.discover(*postions1)

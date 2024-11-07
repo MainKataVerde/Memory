@@ -14,22 +14,11 @@ class Cpu(player.Player):  # Usamos 'player.Player' si Player está en el módul
             case 1:
                 colmn = random.randint(0, colm - 1)
                 rows = random.randint(0, row - 1)
-                if self.round == 1 :                    
-                    if boardIn[self.rowRm][self.colmRm] == boardIn[rows][colmn]:
+                if boardIn[self.rowRm][self.colmRm] == boardIn[rows][colmn]:
                         return (self.colmRm , self.rowRm)
-                    else :
-                        return(colmn , rows)
-                else:
+                else :
                     return(colmn , rows)
 
     def remind(self,colm, row):
         self.colmRm = colm
         self.rowRm = row
-
-    
-    def resetRound(self):
-        self.round = 1
-    
-    def addRound(self):
-        self.round = 2 
-        
