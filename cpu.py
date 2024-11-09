@@ -29,7 +29,7 @@ class Cpu(player.Player):
         
         # Guardar la última posición seleccionada
         self.last_position = (row, col)
-        return (row, col)
+        return (col,row)
 
     def remind(self, pos, card):
         # Guardar en memoria la posición y carta vista

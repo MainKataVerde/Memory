@@ -11,6 +11,7 @@ class Engine:
         self.player1 = Player
         self.player2 = Player
         self.cpu = Cpu
+        self.cpu2 = Cpu
         
     def start(self):
         self.play()
@@ -28,7 +29,7 @@ class Engine:
                 columns = int(input("Columnas: "))
                 rows = int(input("Filas: "))
         
-        modo = int(input("Bien ahora que tenemos el tablero , ¿qué modo de juego quieres jugar?\n 1.Modo Jugador contra jugador\n 2.Modo Jugador contra CPU\n --> "))        
+        modo = int(input("Bien ahora que tenemos el tablero , ¿qué modo de juego quieres jugar?\n 1.Modo Jugador contra jugador\n 2.Modo Jugador contra Maquina\n 3.Modo Maquina contra Maquina\n  --> "))        
         self.game_board = Board(columns , rows)
         self.game_board.fillBoard()
         
@@ -223,9 +224,110 @@ class Engine:
                         else:
                             print("!Que mal¡ , mas suerte la proxima ronda")
                             turno2 = True
+                        time.sleep(1.3)   
+            case 3 : 
+                print("Modo seleccionado : Maquina contra maquina\nDisfrutad y suerte!! :)")
+                self.cpu= Cpu(1)
+                self.cpu2= Cpu(1)
+                self.cpu.setname("Makinon1")
+                self.cpu2.setname("Makinon2")
+                while acabado != True :
+                    turno1 = False
+                    turno2 = False
+                    #turno de la maquina1
+                    while turno1 != True:
                         time.sleep(1.3)
-                            
-                  
+                        os.system('cls')
+                        print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
+                        self.game_board.boarOutPrint()
+                        print("Ahora tu ", self.cpu.getname() , "¿Dónde crees que esta el primero?")
+                        time.sleep(1.3)
+                        postions1 = self.cpu.cpuPlay(columns,rows , self.game_board.boardOut)
+                        if self.game_board.checkPosition(*postions1) == False:
+                            while self.game_board.checkPosition(*postions1) == False:
+                                print("Esa posicion ya ha sido adivinada elige una correcta")
+                                postions1 = self.cpu.cpuPlay(columns,rows,self.game_board.boardOut)
+                                os.system('cls')
+                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        os.system('cls')
+                        print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
+                        self.game_board.discover(*postions1)
+                        print("¿Y el segundo?")
+                        time.sleep(1.3)
+                        postions2 = self.cpu.cpuPlay(columns,rows, self.game_board.boardOut)
+                        if self.game_board.checkPosition(*postions2) == False:
+                            while self.game_board.checkPosition(*postions2) == False:
+                                print("Esa posicion ya ha sido adivinada elige una correcta")
+                                postions2 = self.cpu.cpuPlay(columns,rows, self.game_board.boardOut)
+                                os.system('cls')
+                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        os.system('cls')
+                        print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
+                        self.game_board.discover(*postions2)
+                        if self.game_board.checkPairs(*postions1,*postions2):
+                            print("Muy bien " , self.cpu.getname() , ", has ganado 2 puntos")
+                            self.cpu.addpoints()
+                            if (self.cpu2.getpoints() + self.cpu.getpoints()) == self.game_board.maxPoint :
+                                if self.cpu2.getpoints() > self.cpu.getpoints() :
+                                    print(f"¡Enhorabuena {self.cpu2.getname()}! , eres el ganador\n Con una puntuacion de {self.player1.getpoints()}")
+                                elif self.cpu2.getpoints() < self.cpu.getpoints():
+                                    print(f"¡Enhorabuena {self.cpu.getname()}! , eres el ganador\n Con una puntuacion de {self.cpu.getpoints()}")
+                                elif self.cpu2.getpoints() == self.cpu.getpoints():
+                                    print("¡TENEMOS UN EMPATEEEEEE!")
+                                acabado = True
+                                turno1 = True
+                                turno2 = True
+                        else:
+                            print("!Que mal¡ , mas suerte la proxima ronda")
+                            turno1 = True
+                        time.sleep(1.3)  
+                    #turno de la maquina2  
+                    while turno2 != True:
+                        time.sleep(1.3)
+                        os.system('cls')
+                        print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
+                        self.game_board.boarOutPrint()
+                        print("Ahora tu ", self.cpu2.getname() , "¿Dónde crees que esta el primero?")
+                        time.sleep(1.3)
+                        postions1 = self.cpu2.cpuPlay(columns,rows , self.game_board.boardOut)
+                        if self.game_board.checkPosition(*postions1) == False:
+                            while self.game_board.checkPosition(*postions1) == False:
+                                print("Esa posicion ya ha sido adivinada elige una correcta")
+                                postions1 = self.cpu2.cpuPlay(columns,rows,self.game_board.boardOut)
+                                os.system('cls')
+                        self.cpu2.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        os.system('cls')
+                        print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
+                        self.game_board.discover(*postions1)
+                        print("¿Y el segundo?")
+                        time.sleep(1.3)
+                        postions2 = self.cpu2.cpuPlay(columns,rows, self.game_board.boardOut)
+                        if self.game_board.checkPosition(*postions2) == False:
+                            while self.game_board.checkPosition(*postions2) == False:
+                                print("Esa posicion ya ha sido adivinada elige una correcta")
+                                postions2 = self.cpu2.cpuPlay(columns,rows, self.game_board.boardOut)
+                                os.system('cls')
+                        self.cpu2.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        os.system('cls')
+                        print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
+                        self.game_board.discover(*postions2)
+                        if self.game_board.checkPairs(*postions1,*postions2):
+                            print("Muy bien " , self.cpu2.getname() , ", has ganado 2 puntos")
+                            self.cpu2.addpoints()
+                            if (self.cpu2.getpoints() + self.cpu.getpoints()) == self.game_board.maxPoint :
+                                if self.cpu2.getpoints() > self.cpu.getpoints() :
+                                    print(f"¡Enhorabuena {self.cpu2.getname()}! , eres el ganador\n Con una puntuacion de {self.player1.getpoints()}")
+                                elif self.cpu2.getpoints() < self.cpu.getpoints():
+                                    print(f"¡Enhorabuena {self.cpu.getname()}! , eres el ganador\n Con una puntuacion de {self.cpu.getpoints()}")
+                                elif self.cpu2.getpoints() == self.cpu.getpoints():
+                                    print("¡TENEMOS UN EMPATEEEEEE!")
+                                acabado = True
+                                turno2 = True
+                                turno1 = True
+                        else:
+                            print("!Que mal¡ , mas suerte la proxima ronda")
+                            turno2 = True
+                        time.sleep(1.3) 
 
                     
 
