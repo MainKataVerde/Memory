@@ -204,7 +204,7 @@ class Engine:
                                 print("Esa posicion ya ha sido adivinada elige una correcta")
                                 postions2 = self.cpu.cpuPlay(columns,rows, self.game_board.boardOut)
                                 os.system('cls')
-                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[1] - 1][postions1[0] - 1])
                         os.system('cls')
                         print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n\n")
                         self.game_board.discover(*postions2)
@@ -248,7 +248,7 @@ class Engine:
                                 print("Esa posicion ya ha sido adivinada elige una correcta")
                                 postions1 = self.cpu.cpuPlay(columns,rows,self.game_board.boardOut)
                                 os.system('cls')
-                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[1] - 1][postions1[0] - 1])
                         os.system('cls')
                         print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
                         self.game_board.discover(*postions1)
@@ -260,7 +260,7 @@ class Engine:
                                 print("Esa posicion ya ha sido adivinada elige una correcta")
                                 postions2 = self.cpu.cpuPlay(columns,rows, self.game_board.boardOut)
                                 os.system('cls')
-                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[1] - 1][postions1[0] - 1])
                         os.system('cls')
                         print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
                         self.game_board.discover(*postions2)
@@ -295,7 +295,7 @@ class Engine:
                                 print("Esa posicion ya ha sido adivinada elige una correcta")
                                 postions1 = self.cpu2.cpuPlay(columns,rows,self.game_board.boardOut)
                                 os.system('cls')
-                        self.cpu2.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        self.cpu2.remind(postions1 , self.game_board.boardIn[postions1[1] - 1][postions1[0] - 1])
                         os.system('cls')
                         print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
                         self.game_board.discover(*postions1)
@@ -307,7 +307,7 @@ class Engine:
                                 print("Esa posicion ya ha sido adivinada elige una correcta")
                                 postions2 = self.cpu2.cpuPlay(columns,rows, self.game_board.boardOut)
                                 os.system('cls')
-                        self.cpu2.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        self.cpu2.remind(postions1 , self.game_board.boardIn[postions1[1] - 1][postions1[0] - 1])
                         os.system('cls')
                         print("Puntos\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n", self.cpu2.getname() , ": ", self.cpu2.getpoints(),"\n\n")
                         self.game_board.discover(*postions2)
@@ -316,7 +316,7 @@ class Engine:
                             self.cpu2.addpoints()
                             if (self.cpu2.getpoints() + self.cpu.getpoints()) == self.game_board.maxPoint :
                                 if self.cpu2.getpoints() > self.cpu.getpoints() :
-                                    print(f"¡Enhorabuena {self.cpu2.getname()}! , eres el ganador\n Con una puntuacion de {self.player1.getpoints()}")
+                                    print(f"¡Enhorabuena {self.cpu2.getname()}! , eres el ganador\n Con una puntuacion de {self.cpu2.getpoints()}")
                                 elif self.cpu2.getpoints() < self.cpu.getpoints():
                                     print(f"¡Enhorabuena {self.cpu.getname()}! , eres el ganador\n Con una puntuacion de {self.cpu.getpoints()}")
                                 elif self.cpu2.getpoints() == self.cpu.getpoints():
