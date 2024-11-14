@@ -60,12 +60,15 @@ class Board:
             self.boardOut[(rw1-1)][(colm1 - 1)] = "*"
             self.boardOut[(rw2-1)][(colm2 - 1)] = "*"
             return False
-    
+    # Metodo para quitar errores de eleccion
     def checkPosition(self , colm , rows):
+        # Si tu eleccion esta fuera del rango posible no deja elegir
         if colm > (self.width * self.height) or rows > (self.width * self.height) : 
             return False
+        # Si la eleccion que has elegido ya habia sido seleccionada no te deja seleccionarla 
         elif self.boardOut[(rows -1)][(colm - 1)] != "*":
             return False
+        # Si no pues la eleccion es buena y te deja elegirlo
         else: 
             return True
             

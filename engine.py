@@ -130,9 +130,16 @@ class Engine:
             case 2 :
                 print("Modo seleccionado : Jugador contra maquina\nDisfrutad y suerte!! :)")
                 self.player1 = Player(input("Introduce tu nombre :"))
-                dificultad = int(input("¿En que dificultad quieres a la maquina?\n1.Facil\n2.Media\n3.Dificil\n > "))
+                dificultad = int(input("¿En que dificultad quieres a la maquina?\n1.Facil\n2.Intermedia\n3.Dificil\n --> "))
                 self.cpu= Cpu(dificultad)
-                print("Maquina en dificultadad Facil\n¡Disfuta!")  
+                match dificultad:
+                    case 1 :
+                        print("Maquina en dificultadad Facil\n¡Disfuta!") 
+                    case 2 :
+                        print("Maquina en dificultadad Intermedia\n¡Disfuta!")
+                    case 3 : 
+                        print("Maquina en dificultadad Dificil\n¡Disfuta!")
+                time.sleep(1.3) 
                 while acabado != True :
                     turno1 = False
                     turno2 = False
@@ -192,7 +199,7 @@ class Engine:
                                 print("Esa posicion ya ha sido adivinada elige una correcta")
                                 postions1 = self.cpu.cpuPlay(columns,rows,self.game_board.boardOut)
                                 os.system('cls')
-                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[0] - 1][postions1[1] - 1])
+                        self.cpu.remind(postions1 , self.game_board.boardIn[postions1[1] - 1][postions1[0] - 1])
                         os.system('cls')
                         print("Puntos\n", self.player1.getname() , ": ", self.player1.getpoints(),"\n", self.cpu.getname() , ": ", self.cpu.getpoints(),"\n\n")
                         self.game_board.discover(*postions1)
